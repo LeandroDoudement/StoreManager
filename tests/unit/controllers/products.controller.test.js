@@ -40,7 +40,7 @@ describe("Unit tests of products.controller", () => {
     expect(res.json).to.have.been.calledWith(idOneProduct);
   });
 
-  it("Returns status 422 and an error if id is not a number", async () => {
+  it("Returns status 404 and an error if id is not a number", async () => {
     const res = {};
     const req = {
         params: { id: 'a' },
@@ -51,11 +51,11 @@ describe("Unit tests of products.controller", () => {
       .stub(productsService, "findProductById")
       .resolves({ type: 'INVALID_VALUE', message: '"id" must be a number' });
     await productsController.listProductById(req, res);
-    expect(res.status).to.have.been.calledWith(422);
+    expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({message: '"id" must be a number'});
   });
 
-  it("Returns status 422 and an error if productId doesnt exist", async () => {
+  it("Returns status 404 and an error if productId doesnt exist", async () => {
     const res = {};
     const req = {
         params: { id: 9999 },
@@ -66,7 +66,7 @@ describe("Unit tests of products.controller", () => {
       .stub(productsService, "findProductById")
       .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
     await productsController.listProductById(req, res);
-    expect(res.status).to.have.been.calledWith(422);
+    expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({message: 'Product not found'});
   });
 
