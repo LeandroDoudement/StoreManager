@@ -4,7 +4,7 @@ const productsService = require("../../../src/services/products.service");
 const productsModel = require("../../../src/models/products.model");
 const { allProducts } = require("./mocks/products.service.mock");
 
-describe("Unit tests of products.service", () => {
+describe("GET Unit tests of products.service", () => {
   afterEach(function () {
     sinon.restore();
   });
@@ -33,3 +33,24 @@ describe("Unit tests of products.service", () => {
     expect(result.message).to.equal("Product not found");
   });
 });
+
+describe("POST Unit tests of products.service", () => {
+  afterEach(function () {
+    sinon.restore();
+  });
+
+  it("Successfully inserts a new product", async () => {
+  sinon.stub(productsModel, "insertProduct").resolves({
+    "id": 1,
+    "name": "produtoTeste"
+  });
+    const result = await productsService.createProduct({ "name": "produtoTeste" })
+    expect(result.type).to.be.equal(null)
+    expect(result.message).to.deep.equal({
+    "id": 1,
+    "name": "produtoTeste"
+  })
+})
+
+});
+

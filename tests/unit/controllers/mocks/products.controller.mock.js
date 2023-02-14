@@ -18,4 +18,14 @@ const idOneProduct = {
   name: "Martelo de Thor",
 };
 
-module.exports = { allProducts, idOneProduct };
+const insertProductMock = {
+  "name": "ProdutoX"
+}
+
+const newProductMock = {
+  "id": 5,
+  "name": "ProdutoX"
+}
+
+
+module.exports = { allProducts, idOneProduct, insertProductMock, newProductMock };

@@ -4,7 +4,7 @@ const productsModel = require("../../../src/models/products.model");
 const connection = require("../../../src/models/connection");
 const { allProducts } = require("./mocks/products.model.mock");
 
-describe("Unit tests of products.model", function () {
+describe("GET Unit tests of products.model", function () {
   afterEach(function () {
     sinon.restore();
   });
@@ -18,5 +18,20 @@ describe("Unit tests of products.model", function () {
     sinon.stub(connection, "execute").resolves([[allProducts[0]]]);
     const result = await productsModel.getProductById(1);
     expect(result).to.be.deep.equal(allProducts[0]);
+  });
+});
+
+describe("POST Unit tests of products.model", function () {
+  afterEach(function () {
+    sinon.restore();
+  });
+
+  it("Successfully inserts a new product", async () => {
+    sinon.stub(connection, "execute").resolves([{ insertId: 1 }]);
+    const result = await productsModel.insertProduct({ name: "produtoTeste" });
+    expect(result).to.be.deep.equal({
+      id: 1,
+      name: "produtoTeste",
+    });
   });
 });
