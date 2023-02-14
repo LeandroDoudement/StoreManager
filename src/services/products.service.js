@@ -1,4 +1,4 @@
-const { getAllProducts, getProductById } = require('../models/products.model');
+const { getAllProducts, getProductById, insertProduct } = require('../models/products.model');
 const { validateId } = require('./validations/inputValuesValidation');
 
 const findAllProducts = async () => {
@@ -16,4 +16,9 @@ const findProductById = async (productId) => {
   return { type: null, message: product };
 };
 
-module.exports = { findAllProducts, findProductById };
+const createProduct = async (product) => {
+  const newProduct = await insertProduct(product);
+  return { type: null, message: newProduct };
+};
+
+module.exports = { findAllProducts, findProductById, createProduct };

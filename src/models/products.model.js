@@ -16,4 +16,13 @@ const getProductById = async (productId) => {
   return camelize(product);
 };
 
-module.exports = { getAllProducts, getProductById };
+const insertProduct = async (product) => {
+  const [{ insertId }] = await connection.execute(
+    'INSERT INTO StoreManager.products (name) VALUE (?)',
+      [product.name],
+  );
+
+  return { id: insertId, name: product.name };
+};
+
+module.exports = { getAllProducts, getProductById, insertProduct };
