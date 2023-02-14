@@ -2,10 +2,10 @@ const camelize = require('camelize');
 const connection = require('./connection');
 
 const getAllProducts = async () => {
-  const [result] = await connection.execute(
+  const [products] = await connection.execute(
     'SELECT * FROM StoreManager.products',
   );
-  return camelize(result);
+  return camelize(products);
 };
 
 const getProductById = async (productId) => {
