@@ -1,8 +1,7 @@
 const productsService = require('../services/products.service');
 
 const listAllProducts = async (_req, res) => {
-  const { type, message } = await productsService.findAllProducts();
-  if (type) return res.status(400).json(message);
+  const { message } = await productsService.findAllProducts();
   res.status(200).json(message);
 };
 
@@ -14,7 +13,6 @@ const listProductById = async (req, res) => {
 };
 
 const insertProduct = async (req, res) => {
-  console.log('Controller:', req.body);
   const product = req.body;
   const { type, message } = await productsService.createProduct(product);
   if (type) return res.status(400).json({ message });
