@@ -12,9 +12,9 @@ const {
 
 router.post(
   '/',
-  validateProductId,
-  validateQuantity,
   validateQuantityValue,
+  validateQuantity,
+  validateProductId,
   salesProductsController.insertsale,
 );
 
