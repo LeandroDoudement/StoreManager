@@ -8,13 +8,20 @@ const insertSales = async () => {
   return insertId;
 };
 
-const insertsaleProduct = async ({ id, sales }) => {
-  sales.forEach((element) => {
-    connection.execute(
-      'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
-      [id, element.productId, element.quantity],
+const insertSaleProduct = async ({ id, sales }) => {
+  const queries = [];
+  
+  for (let i = 0; i < sales.length; i += 1) {
+    const { productId, quantity } = sales[i];
+    queries.push(
+      connection.execute(
+        'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
+        [id, productId, quantity],
+      ),
     );
-  });
+  }
+
+  await Promise.all(queries);
 
   return { id, itemsSold: sales };
 };
@@ -49,4 +56,4 @@ WHERE t2.product_id = ?`,
   return camelize(sale);
 };
 
-module.exports = { insertSales, insertsaleProduct, getAllSales, getSalesById };
+module.exports = { insertSales, insertSaleProduct, getAllSales, getSalesById };

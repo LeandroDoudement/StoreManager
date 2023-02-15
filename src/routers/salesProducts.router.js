@@ -10,10 +10,6 @@ const {
   validateQuantityValue,
 } = require('../middlewares/salesProductsValidation');
 
-router.get('/', salesProductsController.listAllsales);
-
-router.get('/:id', salesProductsController.listsaleById);
-
 router.post(
   '/',
   validateProductId,
@@ -21,5 +17,9 @@ router.post(
   validateQuantityValue,
   salesProductsController.insertsale,
 );
+
+router.get('/', salesProductsController.listAllsales);
+
+router.get('/:id', salesProductsController.listsaleById);
 
 module.exports = router;
