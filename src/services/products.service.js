@@ -32,7 +32,7 @@ const removeProduct = async (id) => {
   const product = await productsModel.getProductById(id);
   if (product === undefined) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
   await productsModel.deleteProduct(id);
-  return { type: null };
+  return { type: null, message: [] };
 };
 
 module.exports = {

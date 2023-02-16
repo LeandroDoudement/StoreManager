@@ -47,3 +47,15 @@ describe("PUT Unit tests of products.model", function () {
     expect(result).to.be.deep.equal({ id: 1, name: "produtoTeste"});
   });
 });
+
+describe("DELETE Unit tests of products.model", function () {
+  afterEach(function () {
+    sinon.restore();
+  });
+
+  it("Successfully deletes a product", async () => {
+    sinon.stub(connection, "execute").resolves(undefined);
+    const result = await productsModel.deleteProduct(1);
+    expect(result).to.be.deep.equal(undefined);
+  });
+});

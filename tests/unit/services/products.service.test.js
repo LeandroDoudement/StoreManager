@@ -63,6 +63,34 @@ describe("PUT Unit tests of products.service", () => {
     const result = await productsService.modifyProduct("produtoTeste", 1)
     expect(result.type).to.be.equal(null)
     expect(result.message).to.deep.equal({ id: 1, name: "produtoTeste"})
+  })
+  it("Returns an error if ID doesnt exist", async () => {
+    sinon.stub(productsModel, "getProductById").resolves(undefined);
+    const result = await productsService.modifyProduct("produtoTeste", 9999999)
+    expect(result.type).to.be.equal('PRODUCT_NOT_FOUND')
+    expect(result.message).to.deep.equal('Product not found')
+  })
+  
+});
+
+describe("DELETE Unit tests of products.service", () => {
+  afterEach(function () {
+    sinon.restore();
+  });
+
+  it("Successfully deletes a product", async () => {
+    sinon.stub(productsModel, "deleteProduct").resolves(undefined);
+    sinon.stub(productsModel, "getProductById").resolves({ id: 1, name: 'Martelo de Thor' });
+    const result = await productsService.removeProduct(1)
+    expect(result.type).to.be.equal(null)
+    expect(result.message).to.deep.equal([])
+  })
+  
+  it("Returns an error if ID doesnt exist", async () => {
+    sinon.stub(productsModel, "getProductById").resolves(undefined);
+    const result = await productsService.removeProduct(9999999)
+    expect(result.type).to.be.equal('PRODUCT_NOT_FOUND')
+    expect(result.message).to.deep.equal('Product not found')
 })
 });
 

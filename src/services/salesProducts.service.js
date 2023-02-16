@@ -35,7 +35,6 @@ const createsale = async (sales) => {
 
 const removeSale = async (id) => {
   const sale = await salesModel.getSalesById(id);
-  console.log(sale);
   if (sale.length === 0) { return { type: 'SALE_NOT_FOUND', message: 'Sale not found' }; }
   await salesModel.deleteSale(id);
   return { type: null, message: [] };

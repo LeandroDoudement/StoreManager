@@ -151,10 +151,10 @@ describe("PUT Unit tests of products.controller", () => {
     res.json = sinon.stub().returns();
     sinon
       .stub(productsService, "modifyProduct")
-      .resolves({ type: null, message: { id: 1, name: "produtoTeste"} });
+      .resolves({ type: null, message: { id: 1, name: "produtoTeste" } });
     await productsController.changeProduct(req, res);
     expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith({ id: 1, name: "produtoTeste"});
+    expect(res.json).to.have.been.calledWith({ id: 1, name: "produtoTeste" });
   });
 
   it("If sale.id doesnt exist, returns an error", async () => {
@@ -169,9 +169,44 @@ describe("PUT Unit tests of products.controller", () => {
     res.json = sinon.stub().returns();
     sinon
       .stub(productsService, "modifyProduct")
-      .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+      .resolves({ type: "PRODUCT_NOT_FOUND", message: "Product not found" });
     await productsController.changeProduct(req, res);
     expect(res.status).to.have.been.calledWith(404);
-    expect(res.json).to.have.been.calledWith({ message: 'Product not found'});
+    expect(res.json).to.have.been.calledWith({ message: "Product not found" });
+  });
+});
+
+describe("DELETE Unit tests of products.controller", () => {
+  afterEach(function () {
+    sinon.restore();
+  });
+
+  it("Successfully deletes a product", async () => {
+    const res = {};
+    const req = {
+      params: { id: 1 },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon
+      .stub(productsService, "removeProduct")
+      .resolves({ type: null, message: [] });
+    await productsController.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.json).to.have.been.calledWith([]);
+  });
+  it("Successfully deletes a product", async () => {
+    const res = {};
+    const req = {
+      params: { id: 9999 },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon
+      .stub(productsService, "removeProduct")
+      .resolves({ type: "PRODUCT_NOT_FOUND", message: "Product not found" });
+    await productsController.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: "Product not found" });
   });
 });
