@@ -22,4 +22,6 @@ router.get('/', salesProductsController.listAllsales);
 
 router.get('/:id', salesProductsController.listsaleById);
 
+router.delete('/:id', salesProductsController.deleteSale);
+
 module.exports = router;

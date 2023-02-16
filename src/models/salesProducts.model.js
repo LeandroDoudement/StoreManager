@@ -10,7 +10,7 @@ const insertSales = async () => {
 
 const insertSaleProduct = async ({ id, sales }) => {
   const queries = [];
-  
+
   for (let i = 0; i < sales.length; i += 1) {
     const { productId, quantity } = sales[i];
     queries.push(
@@ -54,4 +54,14 @@ const getSalesById = async (saleId) => {
   return camelize(sale);
 };
 
-module.exports = { insertSales, insertSaleProduct, getAllSales, getSalesById };
+const deleteSale = async (id) => {
+  await connection.execute('DELETE FROM StoreManager.sales WHERE id = ?', [id]);
+};
+
+module.exports = {
+  insertSales,
+  insertSaleProduct,
+  getAllSales,
+  getSalesById,
+  deleteSale,
+};
