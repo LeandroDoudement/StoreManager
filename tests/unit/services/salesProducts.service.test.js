@@ -45,24 +45,24 @@ describe("GET Unit tests of salesProducts.service", () => {
   });
 });
 
-// describe("POST Unit tests of salesProducts.service", () => {
-//   afterEach(function () {
-//     sinon.restore();
-//   });
+describe("POST Unit tests of salesProducts.service", () => {
+  afterEach(function () {
+    sinon.restore();
+  });
 
-//   it("Returns an error if productId doesn't exist", async () => {
-//     sinon
-//       .stub(salesProductsModel, "insertSaleProduct")
-//       .resolves([{ quantity: 1 }]);
-//     const result = await salesProductsService.createsale([{ quantity: 1 }]);
-//     expect(result.type).to.be.equal(404);
-//     expect(result.message).to.deep.equal("Product not found");
-//   });
+  it("Returns an error if saleId doesn't exist", async () => {
+    sinon
+      .stub(salesProductsModel, "getSalesById")
+      .resolves([]);
+    const result = await salesProductsService.createsale([{ quantity: 1 }]);
+    expect(result.type).to.be.equal(404);
+    expect(result.message).to.deep.equal("Product not found");
+  });
 
-//     it("Successfully inserts a new sale", async () => {
-//     sinon.stub(salesProductsModel, "insertSaleProduct").resolves(successfullInsertedSale);
-//       const result = await salesProductsService.createsale(newSaleMock)
-//       expect(result.type).to.be.equal(null)
-//       expect(result.message).to.deep.equal(successfullInsertedSale)
-//   })
-// });
+    it("Successfully inserts a new sale", async () => {
+    sinon.stub(salesProductsModel, "insertSaleProduct").resolves(successfullInsertedSale);
+      const result = await salesProductsService.createsale(newSaleMock)
+      expect(result.type).to.be.equal(null)
+      expect(result.message).to.deep.equal(successfullInsertedSale)
+  })
+});

@@ -15,4 +15,10 @@ const validateProduct = async (id) => {
   return { type: null, message: '' };
 };
 
-module.exports = { validateId, validateProduct };
+const validateSaleId = async (saleId) => {
+  const result = await salesProductsModel.getSalesById(saleId);
+  if (result.length === 0) return { type: 404, message: 'Sale not found' };
+  return { type: null, message: '' };
+};
+
+module.exports = { validateId, validateProduct, validateSaleId };

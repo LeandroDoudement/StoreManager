@@ -50,12 +50,29 @@ const getSalesById = async (saleId) => {
     ORDER BY product_id`,
     [saleId],
   );
-
   return camelize(sale);
 };
 
 const deleteSale = async (id) => {
   await connection.execute('DELETE FROM StoreManager.sales WHERE id = ?', [id]);
+};
+
+const updateSales = async ({ saleId, sales }) => {
+  const queries = [];
+
+  for (let i = 0; i < sales.length; i += 1) {
+    const { productId, quantity } = sales[i];
+    queries.push(
+      connection.execute(
+        'UPDATE StoreManager.sales_products SET quantity = ? WHERE product_id = ?',
+    [quantity, productId],
+      ),
+    );
+  }
+
+  await Promise.all(queries);
+
+  return { saleId, itemsUpdated: sales };
 };
 
 module.exports = {
@@ -64,4 +81,5 @@ module.exports = {
   getAllSales,
   getSalesById,
   deleteSale,
+  updateSales,
 };
