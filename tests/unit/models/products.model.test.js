@@ -35,3 +35,15 @@ describe("POST Unit tests of products.model", function () {
     });
   });
 });
+
+describe("PUT Unit tests of products.model", function () {
+  afterEach(function () {
+    sinon.restore();
+  });
+
+  it("Successfully updates a product", async () => {
+    sinon.stub(connection, "execute").resolves({ id: 1, name: "produtoTeste"});
+    const result = await productsModel.updateProduct({ name: "produtoTeste", id: 1 });
+    expect(result).to.be.deep.equal({ id: 1, name: "produtoTeste"});
+  });
+});

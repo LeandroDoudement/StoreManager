@@ -54,7 +54,7 @@ describe("GET Unit tests of products.controller", () => {
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
     sinon
-      .stub(productsValidation, "validateProduct")
+      .stub(productsValidation, "validateProductName")
       .resolves({ type: "INVALID_VALUE", message: '"id" must be a number' });
     await productsController.listProductById(req, res);
     expect(res.status).to.have.been.calledWith(404);
@@ -105,12 +105,10 @@ describe("POST Unit tests of products.controller", () => {
     };
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
-    sinon
-      .stub(productsService, "createProduct")
-      .resolves({
-        type: 400,
-         message: '"name" is required' ,
-      });
+    sinon.stub(productsService, "createProduct").resolves({
+      type: 400,
+      message: '"name" is required',
+    });
     await productsController.insertProduct(req, res);
     expect(res.status).to.have.been.calledWith(400);
     expect(res.json).to.have.been.calledWith({ message: '"name" is required' });
@@ -119,21 +117,61 @@ describe("POST Unit tests of products.controller", () => {
     const res = {};
     const req = {
       body: {
-        "name": "",
+        name: "",
       },
     };
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
-    sinon
-      .stub(productsService, "createProduct")
-      .resolves({
-        type: 422,
-        message: '"name" length must be at least 5 characters long',
-      });
+    sinon.stub(productsService, "createProduct").resolves({
+      type: 422,
+      message: '"name" length must be at least 5 characters long',
+    });
     await productsController.insertProduct(req, res);
     expect(res.status).to.have.been.calledWith(400);
     expect(res.json).to.have.been.calledWith({
       message: '"name" length must be at least 5 characters long',
     });
+  });
+});
+
+describe("PUT Unit tests of products.controller", () => {
+  afterEach(function () {
+    sinon.restore();
+  });
+
+  it("Successfully updates a product", async () => {
+    const res = {};
+    const req = {
+      params: { id: 1 },
+      body: {
+        name: "produtoTeste",
+      },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon
+      .stub(productsService, "modifyProduct")
+      .resolves({ type: null, message: { id: 1, name: "produtoTeste"} });
+    await productsController.changeProduct(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith({ id: 1, name: "produtoTeste"});
+  });
+
+  it("If sale.id doesnt exist, returns an error", async () => {
+    const res = {};
+    const req = {
+      params: { id: 999999 },
+      body: {
+        name: "produtoTeste",
+      },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon
+      .stub(productsService, "modifyProduct")
+      .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+    await productsController.changeProduct(req, res);
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found'});
   });
 });

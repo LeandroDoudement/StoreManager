@@ -51,6 +51,18 @@ describe("POST Unit tests of products.service", () => {
     "name": "produtoTeste"
   })
 })
+});
 
+describe("PUT Unit tests of products.service", () => {
+  afterEach(function () {
+    sinon.restore();
+  });
+
+  it("Successfully updates a product", async () => {
+  sinon.stub(productsModel, "updateProduct").resolves({ id: 1, name: "produtoTeste"});
+    const result = await productsService.modifyProduct("produtoTeste", 1)
+    expect(result.type).to.be.equal(null)
+    expect(result.message).to.deep.equal({ id: 1, name: "produtoTeste"})
+})
 });
 
