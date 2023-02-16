@@ -11,7 +11,7 @@ const findProductById = async (productId) => {
   if (error.type) return error;
 
   const product = await productsModel.getProductById(productId);
-  if (!product) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+  if (!product) { return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' }; }
 
   return { type: null, message: product };
 };
@@ -21,4 +21,16 @@ const createProduct = async (product) => {
   return { type: null, message: newProduct };
 };
 
-module.exports = { findAllProducts, findProductById, createProduct };
+const modifyProduct = async (name, id) => {
+  const product = await productsModel.getProductById(id);
+  if (product === undefined) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+  const newProduct = await productsModel.updateProduct({ name, id });
+  return { type: null, message: newProduct };
+};
+
+module.exports = {
+  findAllProducts,
+  findProductById,
+  createProduct,
+  modifyProduct,
+};
