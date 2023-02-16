@@ -69,5 +69,47 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "0567985c-afaa-41d2-b897-655f76aa7488",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/products/100000",
+    "url": "localhost:3000/products/100000",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-02-16T02:08:42.447Z",
+    "modified": "2023-02-16T02:08:42.447Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "fe4db0c7-2dcd-441e-b924-15fa99fe29cc",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/products/1",
+    "url": "localhost:3000/products/1",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-02-16T02:11:19.242Z",
+    "modified": "2023-02-16T02:11:19.242Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "c9de761a-42a3-4896-9c5b-92f9e1669f1c",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/products/2",
+    "url": "localhost:3000/products/2",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-02-16T02:12:40.750Z",
+    "modified": "2023-02-16T02:12:40.750Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
