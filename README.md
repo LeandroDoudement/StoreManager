@@ -1,13 +1,32 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Store Manager
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+Esse repositório contém um sistema de gerenciamento de uma loja fictícia, desenvolvido como projeto prático do curso de Desenvolvimento de Software da [Trybe](https://www.betrybe.com/). O objetivo do projeto é aplicar conceitos de desenvolvimento web como CRUD (Create, Read, Update e Delete), conexão com banco de dados e testes automatizados.
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+## Funcionalidades
+
+O Store Manager possui as seguintes funcionalidades:
+
+- Cadastro de produtos
+- Listagem de produtos
+- Busca de produtos por id ou nome
+- Edição de produtos
+- Remoção de produtos
+- Cadastro de usuários
+- Autenticação de usuários
+- Listagem de vendas
+- Criação de vendas
+- Cálculo de valor total da venda
+
+## Tecnologias utilizadas
+
+O projeto foi desenvolvido com as seguintes tecnologias:
+
+- [Node.js](https://nodejs.org)
+- [Express](https://expressjs.com/)
+- [SQLite](https://www.sqlite.org/index.html)
+- [Sequelize](https://sequelize.org/)
+- [JWT](https://jwt.io/)
+- [Mocha](https://mochajs.org/) e [Chai](https://www.chaijs.com/) para testes automatizados
+- [Swagger](https://swagger.io/) para documentação da API
+
+
